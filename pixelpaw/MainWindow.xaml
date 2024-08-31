@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window
+    Title="Test App"
+    x:Class="pixelpaw.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:pixelpaw"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    >
+
+    <Grid Background="LightGray">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Padding="50,20">
+
+            <!--ABOUT (1)-->
+            <StackPanel CornerRadius="10" Width="auto" Background="WhiteSmoke" Padding="12,12" Margin="5">
+
+                <ListView SelectionMode="None">
+                    <!-- Item Box, this one has About -->
+                    <StackPanel Margin="10">
+
+                        <!-- Heading About -->
+                        <TextBlock Text="About" Style="{StaticResource HeadingTextStyle}" />
+
+                        <!-- App Version text -->
+                        <TextBlock FontSize="13">
+                            <Run Text="app version:" />
+                            <Run x:Name="AppVersion" Text="xx.xx.xx" Foreground="Gray" />
+                        </TextBlock>
+
+                        <!-- Underline -->
+                        <StackPanel Height="2" Background="LightGray" CornerRadius="3" Margin="0,5,0,0" />
+                    
+                    </StackPanel>
+
+                    <!-- Item Box, this one has Heading -->
+                    <StackPanel Margin="10">
+                        <TextBlock Text="Heading" Style="{StaticResource HeadingTextStyle}"/>
+                        <TextBlock TextWrapping="Wrap" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor." FontSize="13" Foreground="Gray" />
+                    </StackPanel>
+                </ListView>
+
+            </StackPanel>
+            
+            <!--ACCELERATE (2)-->
+            <StackPanel x:Name="AccelerateStack" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,20">
+                <!-- the grey area of the acceleration bar-->
+                <Canvas x:Name="AccelerationBarCanvas" Width="55" Height="155" Background="#bababa" Margin="0,0,0,10">
+                    <!-- the acceleration bar's indicator-->
+                    <Rectangle x:Name="AccelerationBar" Canvas.Top="155" Width="55" Height="0" Fill="MediumPurple"/>
+                </Canvas>
+                <!-- accelerate button -->
+                <Button x:Name="AccelerateButton" Padding="15,5" Background="MediumPurple" Foreground="White">
+                    <Button.Resources>
+                        <Color x:Key="ButtonForegroundPointerOver">MediumPurple</Color>
+                    </Button.Resources>
+                    Accelerate
+                </Button>
+            </StackPanel>
+
+            <!--SESSION (3) to look at the LoginTimeTemplate visit App.xml-->
+            <StackPanel x:Name="ExpanderStack" HorizontalAlignment="Stretch" Background="LightGray" CornerRadius="10" Margin="5" >
+
+                <Expander Header="Session history" Style="{StaticResource SessionExpanderStyle}">
+                    <ScrollViewer MaxHeight="100" Width="auto" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden">
+                    <ItemsControl  ItemsSource="{Binding LoginTimes}" ItemTemplate="{StaticResource LoginTimeTemplate}" />
+                    </ScrollViewer>
+                    
+                </Expander>
+            </StackPanel>
+
+        </StackPanel>
+    </Grid>
+</Window>
